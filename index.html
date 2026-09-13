@@ -84,6 +84,14 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .progress-bar-fill{height:100%;background:var(--red);border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .audio-hint{font-size:11px;color:var(--text-3);margin-top:10px;cursor:pointer;text-align:right;transition:color var(--transition)}
 .audio-hint.active{color:var(--green)}
+.hs-row{display:flex;gap:8px;margin-top:12px}
+.hs-stat{flex:1;background:var(--bg-2);border:1px solid var(--border-soft);border-radius:10px;padding:8px 12px;transition:background var(--transition),border-color var(--transition)}
+.hs-label{font-size:10px;color:var(--text-3);letter-spacing:.5px}
+.hs-val{font-size:15px;font-weight:600;font-family:var(--serif);margin-top:2px}
+.hs-val.hs-red{color:var(--red)}
+.hs-val.hs-blue{color:var(--blue)}
+.hs-val.hs-green{color:var(--green)}
+.hs-motto{font-size:12px;font-weight:400;color:var(--red);margin-left:8px;letter-spacing:1.5px;font-family:var(--sans)}
 
 /* ==================== Section titles ==================== */
 .sec-title{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--text);padding:2px 2px 12px;letter-spacing:.5px}
@@ -114,6 +122,26 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .fitness-card:last-child{margin-bottom:0}
 .fitness-card.incomplete{border-color:var(--red-border);background:var(--soft)}
 .fitness-card.completed{border-color:var(--green-border);background:var(--soft)}
+/* 训练成就卡（多邻国式反馈） */
+.fit-ach{background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius);padding:14px;margin-bottom:10px;box-shadow:var(--shadow)}
+.fa-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.fa-streak{font-size:13px;color:var(--text-2)}
+.fa-streak b{font-size:22px;color:var(--red);margin:0 3px;font-weight:600}
+.fa-streak .fa-flame{font-size:16px}
+.fa-level{font-size:12px;color:var(--amber);font-weight:600}
+.fa-xpbar{height:8px;border-radius:4px;background:var(--soft);overflow:hidden}
+.fa-xpfill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--amber),var(--red));transition:width .6s ease}
+.fa-xptext{font-size:11px;color:var(--text-3);margin-top:4px}
+.fa-week{display:flex;justify-content:space-between;margin-top:10px;padding:0 2px}
+.fa-day{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:var(--text-3)}
+.fa-day .fa-dot{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border-soft);background:transparent;transition:background .3s ease}
+.fa-day.trained .fa-dot{background:var(--green);border-color:var(--green)}
+.fa-day.today .fa-dot{border-color:var(--amber)}
+.fa-day.today{color:var(--amber)}
+.fa-day.future{opacity:.35}
+.fa-stats{font-size:11px;color:var(--text-2);margin-top:10px;padding-top:8px;border-top:1px dashed var(--border-soft)}
+.fa-xpfill.eng{background:linear-gradient(90deg,var(--blue),var(--purple))}
+.fa-xpfill.lib{background:linear-gradient(90deg,var(--purple),var(--blue))}
 .f-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
 .f-name{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
 .f-status{font-size:10px;font-weight:600;letter-spacing:.5px}
@@ -223,7 +251,7 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .english-sentence-box .es-trans{font-size:12px;color:var(--text-2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);line-height:1.65}
 
 /* ==================== Single Task Row ==================== */
-.single-task{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius);transition:all var(--transition);box-shadow:var(--shadow)}
+.single-task{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding:14px 16px;background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius);transition:all var(--transition);box-shadow:var(--shadow)}
 .single-task:hover{transform:translateY(-1px);box-shadow:var(--shadow-md)}
 .single-task.incomplete{border-color:var(--red-border);background:var(--soft)}
 .single-task.completed{border-color:var(--green-border);background:var(--soft)}
@@ -288,8 +316,10 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .toast.show{transform:translateX(-50%) translateY(0)}
 
 /* ==================== Footer ==================== */
-.app-footer{text-align:center;padding:24px 0 8px;font-size:11px;color:var(--text-3)}
-.app-footer .reset-btn{margin-top:12px;padding:8px 20px;border-radius:var(--pill);background:transparent;border:1px solid var(--border);color:var(--text-2);font-size:12px;transition:all var(--transition)}
+.app-footer{padding:14px 0 8px;font-size:11px;color:var(--text-3)}
+.foot-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.foot-note{font-size:10px;color:var(--text-3);letter-spacing:.3px;text-align:left}
+.app-footer .reset-btn{padding:6px 14px;border-radius:var(--pill);background:transparent;border:1px solid var(--border);color:var(--text-2);font-size:11px;flex-shrink:0;transition:all var(--transition)}
 .app-footer .reset-btn:active{transform:scale(.96);background:var(--bg-2)}
 
 /* ==================== Daily Libraries ==================== */
@@ -375,6 +405,13 @@ input,textarea{font-family:inherit;outline:none;border:none}
   </div>
   <div class="lib-body" id="lib-body" data-page-node-id="7MPynC5cOihV9ZTNG0X9Sx"></div>
 </div>
+<div id="eng-overlay" class="lib-overlay hidden">
+  <div class="lib-head">
+    <button class="lib-back" onclick="closeEngDetail()">✕</button>
+    <div class="lib-head-title" id="eng-head-title"></div>
+  </div>
+  <div class="lib-body" id="eng-body"></div>
+</div>
 <button id="theme-toggle" onclick="toggleTheme()" aria-label="切换主题" data-page-node-id="2JCXZcppwHQkTnxYIK2h3I"></button>
 
 
@@ -397,10 +434,10 @@ var TASK_DEFS = [
   { id:'english_words', name:'3个英语单词', module:1, icon:'📖', desc:'每日固定必做' },
   { id:'english_sentence', name:'1个英语句子', module:1, icon:'✍️', desc:'每日固定必做' },
   { id:'fitness_quads', name:'股四头肌训练', module:2, icon:'🦵', desc:'语音引导 · 约12分钟' },
-  { id:'fitness_glutes', name:'臀桥臀肌训练', module:2, icon:'🍑', desc:'Tabata音乐引导 · 12分15秒' },
-  { id:'fitness_chest', name:'胸肌上肢训练', module:2, icon:'💪', desc:'Tabata音乐引导 · 12分15秒' },
-  { id:'fitness_cervical', name:'颈椎训练', module:2, icon:'🧘', desc:'Tabata音乐引导 · 12分15秒' },
-  { id:'fitness_knees', name:'膝盖养护训练', module:2, icon:'🦴', desc:'Tabata音乐引导 · 12分15秒' },
+  { id:'fitness_glutes', name:'臀桥臀肌训练', module:2, icon:'🍑', desc:'Tabata音乐引导 · 8分10秒' },
+  { id:'fitness_chest', name:'胸肌上肢训练', module:2, icon:'💪', desc:'Tabata音乐引导 · 8分10秒' },
+  { id:'fitness_cervical', name:'颈椎训练', module:2, icon:'🧘', desc:'Tabata音乐引导 · 8分10秒' },
+  { id:'fitness_knees', name:'膝盖养护训练', module:2, icon:'🦴', desc:'Tabata音乐引导 · 8分10秒' },
   { id:'journal', name:'每日日记', module:3, icon:'📝', desc:'在MacBook完成日记后打卡' }
 ];
 
@@ -3722,12 +3759,217 @@ var state = {
   englishVer: 3,  // 英语内容版本号，改动时递增以强制刷新旧数据（v6.5扩至360组，v6.6修提醒，v6.8亲子160条打乱排序）
   inspirations: [],
   libs: { marketing:{date:'',idx:0,seen:[]}, model:{date:'',idx:0,seen:[]}, parenting:{date:'',idx:0,seen:[]} },
-  libFavs: []
+  libFavs: [],
+  fitStats: { sessions:0, minutes:0, kcal:0, xp:0, streak:0, best:0, lastDay:'', days:{} },
+  engStats: { words:0, sentences:0, xp:0, streak:0, best:0, lastDay:'', days:{} },
+  libStats: { points:0, xp:0, streak:0, best:0, lastDay:'', days:{} }
 };
 
 function getTodayKey() {
   var d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+/* ========================================================================
+   训练反馈系统（多邻国式成就感）：连续天数 / XP等级 / 7天日历 / 累计消耗
+======================================================================== */
+var FIT_XP_PER_SESSION = 50;   // 每次训练 +50 XP
+var FIT_XP_PER_LEVEL = 250;    // 每 250 XP 升一级（约 5 次训练升一级）
+var FIT_LEVEL_TITLES = ['肌肉觉醒','力量萌芽','渐入佳境','稳定增长','坚实如铁','钢铁之躯','铜筋铁骨','金刚不坏','登峰造极'];
+var FIT_STREAK_MILESTONES = [3, 7, 14, 30, 60, 100];
+// 估算消耗（千卡/次，按 65kg 体重 MET 法粗算）与训练时长（分钟）
+var FIT_KCAL = { fitness_quads: 90, fitness_glutes: 75, fitness_chest: 80, fitness_cervical: 35, fitness_knees: 35 };
+var FIT_MINUTES = { fitness_quads: 12, fitness_glutes: 8, fitness_chest: 8, fitness_cervical: 8, fitness_knees: 8 };
+
+// 英语 / 知识库成长档案（与健身同一套反馈体系）
+var ENG_XP_PER_SESSION = 50, ENG_XP_PER_LEVEL = 250;
+var ENG_LEVEL_TITLES = ['初识ABC','单词积累','短句入门','开口成句','语感渐成','对答如流','流利表达','出口成章','演讲达人'];
+var LIB_XP_PER_POINT = 10, LIB_XP_PER_LEVEL = 250;   // 每学 1 个知识点 +10 XP
+var LIB_LEVEL_TITLES = ['大脑热身','开动脑筋','灵光一闪','脑洞渐开','思维敏捷','触类旁通','融会贯通','脑力全开','学富五车'];
+
+function defaultGrowth(extra) {
+  var g = { xp:0, streak:0, best:0, lastDay:'', days:{} };
+  if (extra) for (var k in extra) g[k] = extra[k];
+  return g;
+}
+
+// 连续天数（每天首次记录时推进）：返回连续文案，当天已记录过返回 ''
+function growthStreak(fs) {
+  var today = getTodayKey();
+  if (fs.lastDay === today) return '';
+  fs.streak = (fs.lastDay === fitDateKeyOffset(-1)) ? fs.streak + 1 : 1;
+  fs.lastDay = today;
+  if (fs.streak > fs.best) fs.best = fs.streak;
+  var msg = '连续 ' + fs.streak + ' 天';
+  if (FIT_STREAK_MILESTONES.indexOf(fs.streak) !== -1) msg = '🔥 坚持 ' + fs.streak + ' 天了！' + msg;
+  return msg;
+}
+
+function growthLevelInfo(fs, perLevel, titles) {
+  var level = Math.floor(fs.xp / perLevel) + 1;
+  var into = fs.xp % perLevel;
+  var title = titles[Math.min(level - 1, titles.length - 1)];
+  return { level: level, into: into, need: perLevel, title: title };
+}
+
+// 通用成就卡（健身/英语/知识库共用 fa-* 样式）
+function growthCard(fs, li, opts) {
+  var pct = Math.min(100, Math.round((li.into / li.need) * 100));
+  var labels = ['一','二','三','四','五','六','日'];
+  var today = getTodayKey();
+  var dow = (new Date().getDay() + 6) % 7;   // 周一为 0
+  var dots = '';
+  for (var i = 0; i < 7; i++) {
+    var key = fitDateKeyOffset(i - dow);
+    var trained = fs.days && fs.days[key] && fs.days[key].length > 0;
+    dots += '<div class="fa-day' + (trained ? ' trained' : '') + (key === today ? ' today' : '') + (key > today ? ' future' : '') + '"><span class="fa-dot"></span>' + labels[i] + '</div>';
+  }
+  var html = '';
+  html += '<div class="fit-ach">';
+  html += '<div class="fa-top">';
+  html += '<div class="fa-streak"><span class="fa-flame">' + opts.icon + '</span>' + opts.streakLabel + ' <b>' + fs.streak + '</b> 天</div>';
+  html += '<div class="fa-level">Lv.' + li.level + ' · ' + li.title + '</div>';
+  html += '</div>';
+  html += '<div class="fa-xpbar"><div class="fa-xpfill ' + (opts.fillClass || '') + '" style="width:' + pct + '%"></div></div>';
+  html += '<div class="fa-xptext">' + li.into + ' / ' + li.need + ' XP · 距下一级还差 ' + (li.need - li.into) + ' XP</div>';
+  html += '<div class="fa-week">' + dots + '</div>';
+  html += '<div class="fa-stats">' + opts.stats + '</div>';
+  html += '</div>';
+  return html;
+}
+
+// 英语打卡记录：每次单词任务 +3 词、句子任务 +1 句；同日同任务去重
+function recordEnglish(taskId) {
+  if (!state.engStats) state.engStats = defaultGrowth({ words:0, sentences:0 });
+  var es = state.engStats;
+  if (!es.days) es.days = {};
+  var today = getTodayKey();
+  if (!es.days[today]) es.days[today] = [];
+  if (es.days[today].indexOf(taskId) !== -1) return null;
+  es.days[today].push(taskId);
+  var cutoff = fitDateKeyOffset(-90);
+  Object.keys(es.days).forEach(function(k){ if (k < cutoff) delete es.days[k]; });
+  if (taskId === 'english_words') es.words += 3;
+  else if (taskId === 'english_sentence') es.sentences += 1;
+  var lvBefore = Math.floor(es.xp / ENG_XP_PER_LEVEL);
+  es.xp += ENG_XP_PER_SESSION;
+  var lvAfter = Math.floor(es.xp / ENG_XP_PER_LEVEL);
+  var msg = '+' + ENG_XP_PER_SESSION + ' XP';
+  var st = growthStreak(es);
+  if (st) msg = st + ' · ' + msg;
+  if (lvAfter > lvBefore) {
+    var li = growthLevelInfo(es, ENG_XP_PER_LEVEL, ENG_LEVEL_TITLES);
+    msg = '🎉 升级！Lv.' + li.level + ' ' + li.title + ' · ' + msg;
+  }
+  return msg;
+}
+
+// 知识库记录：每新学 1 个知识点 +10 XP（不去重，每条都算）
+function recordLibPoint() {
+  if (!state.libStats) state.libStats = defaultGrowth({ points:0 });
+  var ls = state.libStats;
+  if (!ls.days) ls.days = {};
+  var today = getTodayKey();
+  if (!ls.days[today]) ls.days[today] = [];
+  ls.days[today].push(1);
+  var cutoff = fitDateKeyOffset(-90);
+  Object.keys(ls.days).forEach(function(k){ if (k < cutoff) delete ls.days[k]; });
+  ls.points++;
+  var lvBefore = Math.floor(ls.xp / LIB_XP_PER_LEVEL);
+  ls.xp += LIB_XP_PER_POINT;
+  var lvAfter = Math.floor(ls.xp / LIB_XP_PER_LEVEL);
+  var msg = '+' + LIB_XP_PER_POINT + ' XP';
+  var st = growthStreak(ls);
+  if (st) msg = st + ' · ' + msg;
+  if (lvAfter > lvBefore) {
+    var li = growthLevelInfo(ls, LIB_XP_PER_LEVEL, LIB_LEVEL_TITLES);
+    msg = '🎉 升级！Lv.' + li.level + ' ' + li.title + ' · ' + msg;
+  }
+  return msg;
+}
+
+function engLevelInfo() { return growthLevelInfo(state.engStats, ENG_XP_PER_LEVEL, ENG_LEVEL_TITLES); }
+function libLevelInfo() { return growthLevelInfo(state.libStats, LIB_XP_PER_LEVEL, LIB_LEVEL_TITLES); }
+
+function renderEngAchievement() {
+  if (!state.engStats) state.engStats = defaultGrowth({ words:0, sentences:0 });
+  var es = state.engStats;
+  return growthCard(es, engLevelInfo(), { icon:'🔥', streakLabel:'连续', fillClass:'eng',
+    stats:'累计学过 ' + es.words + ' 个单词 · ' + es.sentences + ' 个句子 · 最佳连续 ' + es.best + ' 天' });
+}
+
+function renderLibAchievement() {
+  if (!state.libStats) state.libStats = defaultGrowth({ points:0 });
+  var ls = state.libStats;
+  return growthCard(ls, libLevelInfo(), { icon:'🧠', streakLabel:'连续', fillClass:'lib',
+    stats:'已解锁 ' + ls.points + ' 个知识点 · 大脑持续升级中 · 最佳连续 ' + ls.best + ' 天' });
+}
+
+// 头部数据舱：跨健身/英语/知识库三档案汇总 综合连续天数 / 综合等级 / 今日XP
+function headerInsights() {
+  var fit = state.fitStats || {}, eng = state.engStats || {}, lib = state.libStats || {};
+  function dayList(src, key) { return (src.days && src.days[key]) ? src.days[key].length : 0; }
+  function active(key) {
+    return dayList(fit, key) > 0 || dayList(eng, key) > 0 || dayList(lib, key) > 0;
+  }
+  var streak = 0;
+  var start = active(getTodayKey()) ? 0 : -1;   // 今天还没动就从昨天起算当前连续链
+  for (var i = start; i > -400; i--) {
+    if (active(fitDateKeyOffset(i))) streak++;
+    else break;
+  }
+  var today = getTodayKey();
+  var todayXp = dayList(fit, today) * FIT_XP_PER_SESSION +
+                dayList(eng, today) * ENG_XP_PER_SESSION +
+                dayList(lib, today) * LIB_XP_PER_POINT;
+  var totalXp = (fit.xp || 0) + (eng.xp || 0) + (lib.xp || 0);
+  var level = Math.floor(totalXp / FIT_XP_PER_LEVEL) + 1;
+  return { streak: streak, totalXp: totalXp, level: level, todayXp: todayXp };
+}
+
+function fitDateKeyOffset(offset) {
+  var d = new Date();
+  d.setDate(d.getDate() + offset);
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function fitLevelInfo() {
+  return growthLevelInfo(state.fitStats, FIT_XP_PER_LEVEL, FIT_LEVEL_TITLES);
+}
+
+// 训练完成时记录：同一任务每天只记一次；返回多巴胺文案（+XP/连续天数/升级），重复记录返回 null
+function recordFitness(taskId) {
+  if (!state.fitStats) state.fitStats = { sessions:0, minutes:0, kcal:0, xp:0, streak:0, best:0, lastDay:'', days:{} };
+  var fs = state.fitStats;
+  if (!fs.days) fs.days = {};
+  var today = getTodayKey();
+  if (!fs.days[today]) fs.days[today] = [];
+  if (fs.days[today].indexOf(taskId) !== -1) return null;   // 同日同任务去重
+  fs.days[today].push(taskId);
+  var cutoff = fitDateKeyOffset(-90);                        // 明细只保留近 90 天
+  Object.keys(fs.days).forEach(function(k){ if (k < cutoff) delete fs.days[k]; });
+  fs.sessions++;
+  fs.minutes += (FIT_MINUTES[taskId] || 8);
+  fs.kcal += (FIT_KCAL[taskId] || 60);
+  var lvBefore = Math.floor(fs.xp / FIT_XP_PER_LEVEL);
+  fs.xp += FIT_XP_PER_SESSION;
+  var lvAfter = Math.floor(fs.xp / FIT_XP_PER_LEVEL);
+  var msg = '+' + FIT_XP_PER_SESSION + ' XP';
+  var _st = growthStreak(fs);
+  if (_st) msg = _st + ' · ' + msg;
+  if (lvAfter > lvBefore) {
+    var li = fitLevelInfo();
+    msg = '🎉 升级！Lv.' + li.level + ' ' + li.title + ' · ' + msg;
+  }
+  return msg;
+}
+
+// 健身区顶部成就卡：连续天数 / XP 进度条 / 最近 7 天圆点 / 累计消耗
+function renderFitAchievement() {
+  if (!state.fitStats) state.fitStats = defaultGrowth({ sessions:0, minutes:0, kcal:0 });
+  var fs = state.fitStats;
+  return growthCard(fs, fitLevelInfo(), { icon:'🔥', streakLabel:'连续',
+    stats:'累计 ' + fs.sessions + ' 次训练 · 约 ' + fs.minutes + ' 分钟 · 消耗约 ' + fs.kcal + ' 千卡 · 最佳连续 ' + fs.best + ' 天' });
 }
 
 function loadState() {
@@ -3746,6 +3988,12 @@ function loadState() {
   if (!state.inspirations) state.inspirations = [];
   if (!state.libs) state.libs = { marketing:{date:'',idx:0,seen:[]}, model:{date:'',idx:0,seen:[]}, parenting:{date:'',idx:0,seen:[]} };
   if (!state.libFavs) state.libFavs = [];
+  if (!state.fitStats) state.fitStats = { sessions:0, minutes:0, kcal:0, xp:0, streak:0, best:0, lastDay:'', days:{} };
+  (function(){ var _fs = state.fitStats; if (!_fs.days) _fs.days = {}; ['sessions','minutes','kcal','xp','streak','best'].forEach(function(k){ if (typeof _fs[k] !== 'number') _fs[k] = 0; }); if (typeof _fs.lastDay !== 'string') _fs.lastDay = ''; })();
+  if (!state.engStats) state.engStats = { words:0, sentences:0, xp:0, streak:0, best:0, lastDay:'', days:{} };
+  (function(){ var _es = state.engStats; if (!_es.days) _es.days = {}; ['words','sentences','xp','streak','best'].forEach(function(k){ if (typeof _es[k] !== 'number') _es[k] = 0; }); if (typeof _es.lastDay !== 'string') _es.lastDay = ''; })();
+  if (!state.libStats) state.libStats = { points:0, xp:0, streak:0, best:0, lastDay:'', days:{} };
+  (function(){ var _ls = state.libStats; if (!_ls.days) _ls.days = {}; ['points','xp','streak','best'].forEach(function(k){ if (typeof _ls[k] !== 'number') _ls[k] = 0; }); if (typeof _ls.lastDay !== 'string') _ls.lastDay = ''; })();
   ['marketing','model','parenting'].forEach(function(k){
     if (!state.libs[k]) state.libs[k] = {date:'',idx:0,seen:[]};
   });
@@ -4294,6 +4542,7 @@ function finishGuidedTraining() {
   stopQuadsMusic();
 
   state.tasks['fitness_quads'] = true;
+  var _fitMsg = recordFitness('fitness_quads');
   pendingReminders = pendingReminders.filter(function(t) { return t.id !== 'fitness_quads'; });
   saveState();
   playCompleteSound();
@@ -4304,7 +4553,7 @@ function finishGuidedTraining() {
     hideGuidedOverlay();
     if (pendingReminders.length === 0) hideReminderModal();
     renderAll();
-    showToast('训练完成！已自动打卡');
+    showToast('训练完成 · ' + (_fitMsg || '已自动打卡'));
   }, 2000);
 }
 
@@ -4334,7 +4583,8 @@ function renderGuidedPanel() {
     panel.innerHTML = '<div style="text-align:center;padding:40px 0">' +
       '<div style="font-size:52px;margin-bottom:12px">✅</div>' +
       '<div style="font-size:18px;font-weight:500;color:var(--green)">训练完成</div>' +
-      '<div style="font-size:13px;color:var(--text-3);margin-top:6px">已自动打卡</div></div>';
+      '<div style="font-size:13px;color:var(--text-3);margin-top:6px">已自动打卡</div>' +
+      '<div style="font-size:13px;color:var(--amber);margin-top:4px">+' + FIT_XP_PER_SESSION + ' XP · 🔥 连续 ' + (state.fitStats ? state.fitStats.streak : 0) + ' 天</div></div>';
     return;
   }
 
@@ -4415,6 +4665,23 @@ var TABATA_TOTAL = 735;  // 总时长 12分15秒 = 原曲 4分05秒 × 3 遍，�
 var TABATA_BURSTS = 24;      // 训练段总数：3 组 × 4 轮 × 2 段 = 24 个 20 秒训练段
 var TABATA_GROUP_REST = 15;  // 组间休息（第 1、2 组第 4 轮结束后：10 秒 + 多休息 5 秒）
 var TABATA_FINAL_REST = 5;   // 最后收尾 5 秒，让总倒计时 12:15 正好归零
+var TABATA_SONG_SEC = 245;   // 单遍原曲时长（约 4 分 05 秒）
+// 每项训练的音乐遍数（用户要求：4 项 Tabata 训练均只循环 2 遍 = 2 组）
+// bursts：训练段总数（每组 8 段 = 4 轮 × 2 段）；loops：音乐遍数（决定倒计时显示方式）
+var TABATA_PARAMS = {
+  fitness_glutes:   { bursts: 16, loops: 2 },
+  fitness_chest:    { bursts: 16, loops: 2 },
+  fitness_cervical: { bursts: 16, loops: 2 },
+  fitness_knees:    { bursts: 16, loops: 2 }
+};
+function tabataParamFor(id) {
+  var p = TABATA_PARAMS[id];
+  if (!p) p = { bursts: TABATA_BURSTS, loops: 3 };
+  return p;
+}
+function tabataParam() {
+  return tabataParamFor(tabataGuide.key);
+}
 
 var tabataGuide = {
   active: false,
@@ -4469,7 +4736,7 @@ function tabataTick() {
 // 当前训练段（burst，0~23）结束后的休息时长：
 // 每组第 4 轮的第 2 段（序号 7、15）结束 → 组间休息 15 秒；最后一段（序号 23）结束 → 收尾 5 秒；其余 10 秒
 function tabataRestDur() {
-  if (tabataGuide.round === TABATA_BURSTS - 1) return TABATA_FINAL_REST;
+  if (tabataGuide.round === tabataParam().bursts - 1) return TABATA_FINAL_REST;
   if (tabataGuide.round % 8 === 7) return TABATA_GROUP_REST;
   return TABATA_REST;
 }
@@ -4487,7 +4754,7 @@ function tabataNextPhase() {
     tabataGuide.remaining = tabataRestDur();
   } else {
     tabataGuide.round++;
-    if (tabataGuide.round >= TABATA_BURSTS) {
+    if (tabataGuide.round >= tabataParam().bursts) {
       finishTabataGuided();
       return;
     }
@@ -4514,6 +4781,7 @@ function finishTabataGuided() {
   }
   stopTabataMusic();
   state.tasks[key] = true;
+  var _fitMsg = recordFitness(key);
   pendingReminders = pendingReminders.filter(function(t) { return t.id !== key; });
   saveState();
   playCompleteSound();
@@ -4522,7 +4790,7 @@ function finishTabataGuided() {
     hideTabataOverlay();
     if (pendingReminders.length === 0) hideReminderModal();
     renderAll();
-    showToast(cfg.title + '完成！已自动打卡');
+    showToast(cfg.title + '完成 · ' + (_fitMsg || '已自动打卡'));
   }, 2200);
 }
 
@@ -4573,7 +4841,8 @@ function renderTabataPanel() {
     panel.innerHTML = '<div style="text-align:center;padding:40px 0">' +
       '<div style="font-size:52px;margin-bottom:12px">✅</div>' +
       '<div style="font-size:18px;font-weight:500;color:var(--green)">训练完成</div>' +
-      '<div style="font-size:13px;color:var(--text-3);margin-top:6px">' + cfg.title + ' · 已自动打卡</div></div>';
+      '<div style="font-size:13px;color:var(--text-3);margin-top:6px">' + cfg.title + ' · 已自动打卡</div>' +
+      '<div style="font-size:13px;color:var(--amber);margin-top:4px">+' + FIT_XP_PER_SESSION + ' XP · 🔥 连续 ' + (state.fitStats ? state.fitStats.streak : 0) + ' 天</div></div>';
     return;
   }
   var actLen = cfg.actions.length;
@@ -4600,15 +4869,24 @@ function renderTabataPanel() {
   } else {
     elapsed = baseElapsed + TABATA_WORK + (phaseDur - tabataGuide.remaining);
   }
-  var totalLeft = Math.max(0, TABATA_TOTAL - elapsed);                // 总倒计时（从 12:15 开始）
+  // 倒计时显示：2 遍音乐的训练按单曲 4分05秒 倒计时，第二遍重新开始
+  var _p = tabataParam();
+  var totalLeft;
+  if (_p.loops === 2) {
+    var _loop = Math.min(_p.loops, Math.floor(elapsed / TABATA_SONG_SEC) + 1);
+    totalLeft = Math.max(0, TABATA_SONG_SEC - (elapsed - (_loop - 1) * TABATA_SONG_SEC));
+  } else {
+    totalLeft = Math.max(0, TABATA_TOTAL - elapsed);
+  }
   var pct = ((phaseDur - tabataGuide.remaining) / phaseDur) * 100;    // 进度条仍按当前阶段
   var warning = !tabataGuide.paused && totalLeft <= 5 && totalLeft > 0; // 总时间临近结束时提醒
 
   var html = '';
   html += '<div class="guided-close"><button onclick="stopTabataGuided()">✕</button></div>';
-  html += '<div class="chest-music" style="margin-top:0"><span class="cm-ico">🎵</span>' + cfg.title + ' · Faded (Tabata Mix) 原曲循环</div>';
+  html += '<div class="chest-music" style="margin-top:0"><span class="cm-ico">🎵</span>' + cfg.title + ' · Faded (Tabata Mix) 原曲循环 ' + _p.loops + ' 遍</div>';
   html += '<div class="guided-phase-type ' + phaseClass + '">' + phaseLabel + '</div>';
-  html += '<div class="chest-round-num">第 ' + group + ' 组 / 共 3 组 · 第 ' + dispRound + ' 轮 / 共 4 轮 · 每轮 2×(20秒训练+10秒休息)</div>';
+  var _groups = Math.floor(_p.bursts / 8);
+  html += '<div class="chest-round-num">第 ' + group + ' 组 / 共 ' + _groups + ' 组 · 第 ' + dispRound + ' 轮 / 共 4 轮 · 每轮 2×(20秒训练+10秒休息)</div>';
   html += '<div class="chest-action-name">' + action + '</div>';
   html += '<div class="guided-timer chest-timer ' + phaseClass + (warning ? ' warning' : '') + '">' + formatTime(totalLeft) + '</div>';
   html += '<div class="guided-progress chest-progress ' + phaseClass + '"><div class="guided-progress-bar" style="width:' + Math.min(100, pct) + '%"></div></div>';
@@ -4616,7 +4894,7 @@ function renderTabataPanel() {
     : (isGroupRest ? '组间休息，准备下一组'
     : (isFinalRest ? '训练收尾中'
     : (isRest ? '休息中，准备下一个动作' : '跟随节奏完成动作')));
-  html += '<div class="guided-stats">总剩余 ' + formatTime(totalLeft) + ' · 本阶段还剩 ' + Math.max(0, tabataGuide.remaining) + ' 秒 · ' + phaseTip + '<span class="guided-tick-dot" id="tabata-tick-dot"></span></div>';
+  html += '<div class="guided-stats">' + (_p.loops === 2 ? '本遍剩余' : '总剩余') + ' ' + formatTime(totalLeft) + ' · 本阶段还剩 ' + Math.max(0, tabataGuide.remaining) + ' 秒 · ' + phaseTip + '<span class="guided-tick-dot" id="tabata-tick-dot"></span></div>';
   html += '<div class="guided-controls">';
   if (tabataGuide.paused) {
     html += '<button class="pill-btn blue" onclick="resumeTabataGuided()">继续训练</button>';
@@ -4748,7 +5026,7 @@ function startTabataMusic() {
     showToast('⚠ 音乐解码失败，训练将无声继续');
     return;
   }
-  a.loop = true;  // 12 分钟训练，原曲（约4分钟）循环 3 遍
+  a.loop = true;  // 原曲（约4分钟）自动循环，遍数由 TABATA_PARAMS 决定
   var p = a.play();
   if (p && p.catch) p.catch(function() {
     // 自动播放策略拦截（如手机静音开关/省电模式）
@@ -5031,6 +5309,8 @@ function hideReminderModal() {
 
 function modalCheckin(taskId) {
   state.tasks[taskId] = true;
+  var _fitMsg = (taskId.indexOf('fitness_') === 0) ? recordFitness(taskId)
+    : (taskId.indexOf('english_') === 0) ? recordEnglish(taskId) : null;
   saveState();
 
   pendingReminders = pendingReminders.filter(function(t) { return t.id !== taskId; });
@@ -5046,7 +5326,7 @@ function modalCheckin(taskId) {
   }
 
   renderAll();
-  showToast('已完成打卡，继续保持');
+  showToast(_fitMsg ? '已打卡 · ' + _fitMsg : '已完成打卡，继续保持');
 }
 
 function dismissReminder() {
@@ -5108,10 +5388,13 @@ function toggleTask(taskId) {
     if (pendingReminders.length === 0 || allDone) hideReminderModal();
     playCompleteSound();
     if (navigator.vibrate) navigator.vibrate(80);
-    showToast('已完成打卡，继续保持');
+    var _fitMsg = (taskId.indexOf('fitness_') === 0) ? recordFitness(taskId)
+      : (taskId.indexOf('english_') === 0) ? recordEnglish(taskId) : null;
+    showToast(_fitMsg ? '已打卡 · ' + _fitMsg : '已完成打卡，继续保持');
   }
 
   renderAll();
+  if (engView) renderEngDetail();
 }
 
 function formatTime(seconds) {
@@ -5500,9 +5783,11 @@ function libNext() {
   var arr = LIB_DATA[type];
   var lib = state.libs[type];
   lib.idx = (lib.idx + 1) % arr.length;
-  if (lib.seen.indexOf(lib.idx) === -1) lib.seen.push(lib.idx);
+  var _gm = null;
+  if (lib.seen.indexOf(lib.idx) === -1) { lib.seen.push(lib.idx); _gm = recordLibPoint(); }
   saveState();
   renderLibOverlay();
+  if (_gm && (_gm.indexOf('升级') !== -1 || _gm.indexOf('连续') !== -1)) showToast(_gm);
 }
 
 function libFavCurrent() {
@@ -5644,7 +5929,7 @@ function renderAll() {
   html += '<header class="app-header">';
   html += '<div class="header-top">';
   html += '<div class="header-titles">';
-  html += '<h1>自律打卡</h1>';
+  html += '<h1>自律打卡<span class="hs-motto">今天也要加油</span></h1>';
   html += '<div class="date" id="header-date"></div>';
   html += '</div>';
   html += '<div class="progress-ring">';
@@ -5657,13 +5942,19 @@ function renderAll() {
   html += '<div class="progress-text">' + completed + '/' + total + '</div>';
   html += '</div>';
   html += '</div>';
-  html += '<div class="progress-bar"><div class="progress-bar-fill" style="width:' + pct + '%"></div></div>';
+  var hi = headerInsights();
+  html += '<div class="hs-row">';
+  html += '<div class="hs-stat"><div class="hs-label">连续天数</div><div class="hs-val hs-red">' + hi.streak + ' 天</div></div>';
+  html += '<div class="hs-stat"><div class="hs-label">综合等级</div><div class="hs-val hs-blue">Lv.' + hi.level + '</div></div>';
+  html += '<div class="hs-stat"><div class="hs-label">今日XP</div><div class="hs-val hs-green">+' + hi.todayXp + '</div></div>';
+  html += '</div>';
   html += '<div class="audio-hint" id="audio-hint" onclick="enableAudio()">点击启用提醒音效</div>';
   html += '</header>';
 
   // Daily Libraries: 营销/思维/亲子 + 收藏
   html += '<section class="section">';
   html += '<div class="sec-title"><span class="dot" style="background:var(--amber)"></span>每日知识库<span class="sec-tag">离线内置</span></div>';
+  html += renderLibAchievement();
   html += '<div class="lib-grid">';
   html += '<button class="lib-entry" onclick="openLib(\'marketing\')"><span class="le-icon" style="background:var(--red-bg)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="var(--red)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17.5l5.4-5.4 3.6 3.6 6.5-7"/><path d="M14.3 8.3H20v5.7"/></svg></span><span><span class="le-name">营销知识</span><span class="le-sub">客户心理 · 成交逻辑</span></span></button>';
   html += '<button class="lib-entry" onclick="openLib(\'model\')"><span class="le-icon" style="background:rgba(110,90,126,.08)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="var(--purple)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 1 3.3 10.9c-.8.6-1.3 1.5-1.3 2.6h-4c0-1.1-.5-2-1.3-2.6A6 6 0 0 1 12 3z"/><path d="M10.4 17h3.2"/><path d="M10.8 20.5h2.4"/></svg></span><span><span class="le-name">思维模型</span><span class="le-sub">投资 · 决策 · 成长</span></span></button>';
@@ -5675,17 +5966,16 @@ function renderAll() {
   // Module 1: English
   html += '<section class="section">';
   html += '<div class="sec-title"><span class="dot" style="background:var(--red)"></span>每日英语任务<span class="sec-tag">每日必做</span></div>';
-  html += renderEnglishContent();
-  html += '<div class="task-grid" style="margin-bottom:12px">';
+  html += renderEngAchievement();
   TASK_DEFS.filter(function(t){return t.module===1;}).forEach(function(t) {
     html += renderTaskCard(t);
   });
-  html += '</div>';
   html += '</section>';
 
   // Module 2: Fitness
   html += '<section class="section">';
   html += '<div class="sec-title"><span class="dot" style="background:var(--blue)"></span>五项健身专项训练<span class="sec-tag">音乐引导</span></div>';
+  html += renderFitAchievement();
   TASK_DEFS.filter(function(t){return t.module===2;}).forEach(function(t) {
     html += renderFitnessCard(t);
   });
@@ -5707,9 +5997,10 @@ function renderAll() {
 
   // Footer
   html += '<footer class="app-footer">';
-  html += '<p>数据仅保存在本地浏览器，不上传不联网</p>';
-  html += '<button class="reset-btn" onclick="manualReset()">手动重置今日打卡</button>';
-  html += '<p style="margin-top:8px">v6.9 · 自律打卡</p>';
+  html += '<div class="foot-row">';
+  html += '<span class="foot-note">v8.5 · 数据仅存本地 · 不上传不联网</span>';
+  html += '<button class="reset-btn" onclick="manualReset()">重置今日</button>';
+  html += '</div>';
   html += '</footer>';
 
   app.innerHTML = html;
@@ -5724,14 +6015,17 @@ function renderAll() {
 
 function renderTaskCard(t) {
   var completed = state.tasks[t.id];
+  var engKey = t.id === 'english_words' ? 'words' : 'sentence';
   var html = '';
-  html += '<div class="task-card ' + (completed ? 'completed' : 'incomplete') + '" id="card-' + t.id + '">';
-  html += '<div class="t-icon">' + t.icon + '</div>';
-  html += '<div class="t-name">' + t.name + '</div>';
-  html += '<div class="t-desc">' + t.desc + '</div>';
-  html += '<div class="t-status">' + (completed ? '✓' : '○') + '</div>';
-  html += '<button class="t-btn ' + (completed ? 'gray' : 'green') + '" onclick="toggleTask(\'' + t.id + '\')">' + (completed ? '取消打卡' : '打卡完成') + '</button>';
+  html += '<div class="single-task ' + (completed ? 'completed' : 'incomplete') + '" id="card-' + t.id + '" onclick="openEnglishDetail(\'' + engKey + '\')" style="cursor:pointer">';
+  html += '<div class="st-left">';
+  html += '<span class="st-icon">' + t.icon + '</span>';
+  html += '<div class="st-info">';
+  html += '<div class="st-name">' + t.name + '</div>';
+  html += '<div class="st-desc">点卡片查看今日内容</div>';
   html += '<div class="reminder-info" id="reminder-info-' + t.id + '"></div>';
+  html += '</div></div>';
+  html += '<button class="pill-btn ' + (completed ? 'gray' : 'green') + '" onclick="event.stopPropagation();openEnglishDetail(\'' + engKey + '\')">开始</button>';
   html += '</div>';
   return html;
 }
@@ -5746,7 +6040,8 @@ function renderFitnessCard(t) {
   html += '<span class="f-name">' + t.icon + ' ' + t.name + '</span>';
   html += '<span class="f-status ' + (completed ? 'done' : 'todo') + '">' + (completed ? '✓ 已完成' : '未完成') + '</span>';
   html += '</div>';
-  html += '<div class="f-dur">⏱ ' + t.desc + (isTabata ? ' · 3组×4轮（每轮2×20秒训练+10秒休息）· 组间休息15秒' : '') + '</div>';
+  var _tp = tabataParamFor(t.id);
+  html += '<div class="f-dur">⏱ ' + t.desc + (isTabata ? ' · ' + _tp.loops + '组×4轮（每轮2×20秒训练+10秒休息）· 组间休息15秒' : '') + '</div>';
   html += '<div class="f-controls">';
   html += '<button class="pill-btn blue" style="width:100%" onclick="startGuidedTraining(\'' + t.id + '\')">▶ 开始训练</button>';
   html += '</div>';
@@ -5772,11 +6067,23 @@ function highlightEnglishSentence(sentence, words) {
   return html;
 }
 
-function renderEnglishContent() {
-  if (!state.english || !state.english.words || state.english.words.length === 0) return '';
+// 英语详情页：首页不再平铺，点单词卡/句子卡进入查看+打卡
+var engView = null;
+function openEnglishDetail(key) {
+  engView = key;
+  document.getElementById('eng-head-title').textContent = key === 'words' ? '📖 今日 3 个生词' : '✍️ 今日例句';
+  document.getElementById('eng-overlay').classList.remove('hidden');
+  renderEngDetail();
+}
+function closeEngDetail() {
+  document.getElementById('eng-overlay').classList.add('hidden');
+  engView = null;
+  renderAll();
+}
+function renderEnglishWordsCard() {
   var html = '';
   html += '<div class="english-content">';
-  html += '<div class="ec-title">📖 今日英语内容（' + ENGLISH_GROUPS.length + '组每日轮换）</div>';
+  html += '<div class="ec-title">📖 今日生词（' + ENGLISH_GROUPS.length + '组每日轮换）</div>';
   html += '<div class="english-words">';
   state.english.words.forEach(function(w, i) {
     html += '<div class="english-word-item">';
@@ -5796,6 +6103,12 @@ function renderEnglishContent() {
     html += '</div>';
   });
   html += '</div>';
+  html += '</div>';
+  return html;
+}
+function renderEnglishSentenceCard() {
+  var html = '';
+  html += '<div class="english-content">';
   html += '<div class="english-sentence-box">';
   html += '<div class="es-label"><span>今日句子（串联今日3个生词）</span><span class="es-actions">';
   html += '<button class="spk-btn" onclick="speakEnglishSentence(\'us\')">🔊 美音</button>';
@@ -5808,6 +6121,26 @@ function renderEnglishContent() {
   html += '</div>';
   html += '</div>';
   return html;
+}
+function renderEngDetail() {
+  var body = document.getElementById('eng-body');
+  if (!engView || !state.english || !state.english.words || state.english.words.length === 0) {
+    body.innerHTML = '<div class="lib-empty">今日内容生成中，请关闭后重新进入</div>';
+    return;
+  }
+  var taskId = engView === 'words' ? 'english_words' : 'english_sentence';
+  var completed = state.tasks[taskId];
+  var html = '';
+  if (engView === 'words') {
+    html += renderEnglishWordsCard();
+    html += '<div class="lib-date" style="margin-top:10px">例句模块中有串联这 3 个生词的今日句子</div>';
+  } else {
+    html += renderEnglishSentenceCard();
+  }
+  html += '<div style="padding:16px 0 30px">';
+  html += '<button class="pill-btn ' + (completed ? 'gray' : 'green') + '" style="width:100%" onclick="toggleTask(\'' + taskId + '\')">' + (completed ? '✓ 已打卡 · 点击取消' : '打卡完成（+' + (taskId === 'english_words' ? '3个单词' : '1个句子') + '）') + '</button>';
+  html += '</div>';
+  body.innerHTML = html;
 }
 
 function renderSingleTask(t) {
@@ -6029,7 +6362,7 @@ function init() {
     }
   });
 
-  console.log('✅ 自律打卡APP v6.9 已启动');
+  console.log('✅ 自律打卡APP v8.5 已启动');
 }
 
 if (document.readyState === 'loading') {
