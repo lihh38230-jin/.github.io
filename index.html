@@ -23,7 +23,7 @@
   --soft:#EFF1F2;--soft-border:#D9DEE1; /* 状态卡底·浅高级灰 */
   --blue:#3A5A78;--blue-bg:#EAEFF4;--blue-border:#C9D6E1;
   --head-bg:#3A5A78;
-  --amber:#A87B2F;--purple:#6E5A7E;
+  --amber:#A87B2F;--amber-soft:rgba(168,123,47,.07);--purple:#6E5A7E;
   --border:#E2DED2;--border-soft:#EBE7DC;
   --shadow:0 1px 2px rgba(64,54,34,.04);
   --shadow-md:0 3px 10px rgba(64,54,34,.07);
@@ -41,7 +41,7 @@
   --soft:rgba(233,235,237,.07);--soft-border:rgba(233,235,237,.2);
   --blue:#8AA5BC;--blue-bg:rgba(138,165,188,.11);--blue-border:rgba(138,165,188,.26);
   --head-bg:#223649;
-  --amber:#C9A45C;--purple:#9C86AC;
+  --amber:#C9A45C;--amber-soft:rgba(201,164,92,.12);--purple:#9C86AC;
   --border:rgba(237,231,218,.11);--border-soft:rgba(237,231,218,.06);
   --shadow:0 1px 3px rgba(0,0,0,.28);
   --shadow-md:0 4px 12px rgba(0,0,0,.24);
@@ -128,8 +128,7 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .fit-rail::-webkit-scrollbar{display:none}
 .fit-rail .fitness-card{flex:0 0 58%;max-width:260px;scroll-snap-align:start;margin-bottom:0}
 .fit-rail .fitness-card .pill-btn{width:100%}
-/* v11.64 健身休息日横幅（五卡保留、按钮灰化） */
-.fit-rest-banner{margin-top:10px;background:var(--soft);border:1px dashed var(--soft-border);border-radius:var(--radius);padding:12px 14px;text-align:center;font-size:13px;font-weight:600;color:var(--text)}
+
 .fitness-card.incomplete{border-color:var(--red-border);background:var(--soft)}
 .fitness-card.completed{border-color:var(--green-border);background:var(--soft)}
 /* 训练成就卡（多邻国式反馈） */
@@ -155,6 +154,8 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .wr-down{color:var(--text-3)}
 /* v11.62 今日焦点条 + 周柱状图 */
 .focus-bar{display:flex;align-items:center;gap:10px;margin:10px 16px 0;padding:10px 14px;background:var(--card);border:1px solid var(--border-soft);border-radius:12px;font-size:12px;color:var(--text-2);box-shadow:var(--shadow)}
+/* v11.82 全部完成态：金边 + 淡金底点亮，仪式感由焦点条承接（今日达成卡移除） */
+.focus-bar.focus-done{border-color:var(--amber);background:var(--amber-soft);box-shadow:var(--shadow-md)}
 .fb-next{margin-left:auto;background:none;color:var(--red);font-weight:600;font-size:12px;padding:4px 6px;white-space:nowrap}
 .focus-flash{animation:focusFlash 1.4s ease}
 @keyframes focusFlash{0%,100%{box-shadow:var(--shadow);transform:none}25%,65%{box-shadow:0 0 0 3px var(--red-border);transform:translateY(-3px)}}
@@ -378,9 +379,10 @@ input,textarea{font-family:inherit;outline:none;border:none}
 @keyframes toastFade{to{opacity:0;visibility:hidden}}
 
 /* ==================== Footer ==================== */
-.app-footer{padding:8px 0 4px;font-size:11px;color:var(--text-3)}
-.foot-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.foot-note{font-size:10px;color:var(--text-3);letter-spacing:.3px;text-align:left}
+.app-footer{padding:12px 0 8px;font-size:11px;color:var(--text-3)}
+.foot-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+/* v11.79 页脚说明独立成行、居中、强制单行（窄屏缩字号保底，仍溢出才省略号） */
+.foot-note{display:block;margin-top:10px;font-size:10px;color:var(--text-3);letter-spacing:.3px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .app-footer .reset-btn{padding:6px 14px;border-radius:var(--pill);background:transparent;border:1px solid var(--border);color:var(--text-2);font-size:11px;flex-shrink:0;transition:all var(--transition)}
 .app-footer .reset-btn:active{transform:scale(.96);background:var(--bg-2)}
 /* v11.68 统计摘要条（折叠全年热图+历史回顾） */
@@ -389,10 +391,6 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .stat-strip b{font-weight:600;color:var(--red);font-variant-numeric:tabular-nums}
 .ss-spark{margin-left:auto;display:flex;align-items:center}
 .ss-toggle{color:var(--blue);font-weight:600;white-space:nowrap}
-/* v11.68 今日达成卡 */
-.done-card{display:flex;align-items:center;gap:12px;margin-top:10px;background:var(--card);border:1px solid var(--amber);border-radius:var(--radius);padding:12px 14px;animation:fadeIn .35s ease}
-.dc-title{font-size:14px;font-weight:600;color:var(--text)}
-.dc-sub{font-size:11px;color:var(--text-3);margin-top:3px}
 /* v11.68 可点区域统一按压反馈（安卓） */
 .stat-strip,.lib-entry,.year-day,.insp-mini-btn,.fa-cal{transition:transform .09s ease}
 .lib-entry:active,.year-day:active,.insp-mini-btn:active,.fa-cal:active{transform:scale(.96)}
@@ -517,13 +515,13 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .win-num{font-family:'Arial Rounded MT Bold','Hiragino Maru Gothic ProN','Yuanti SC','Varela Round','PingFang SC','HarmonyOS Sans SC','Microsoft YaHei',sans-serif;font-size:110px;font-weight:700;color:var(--red);line-height:1.08;margin-top:4px;animation:winNumPop .5s .12s cubic-bezier(.34,1.56,.64,1) both}
 .win-unit{font-size:14px;color:var(--text-2);letter-spacing:3px}
 .win-task{margin-top:22px;font-size:14px;color:var(--text-2);background:var(--soft);border-radius:12px;padding:10px 16px;letter-spacing:.5px}
-.win-week{display:flex;align-items:flex-start;margin-top:28px;padding:0 4px}
+.win-week{display:flex;align-items:flex-start;justify-content:center;margin-top:28px;padding:0 4px;max-width:100%}
 .ww-day{display:flex;flex-direction:column;align-items:center;gap:5px}
 .ww-node{width:36px;height:36px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:transparent;flex-shrink:0}
 .ww-node.done{background:var(--red);border-color:var(--red);color:#fff}
-.ww-wd{height:12px;line-height:1;font-size:10px;color:var(--text-3);letter-spacing:1px}
+.ww-wd{height:12px;line-height:1;font-size:10px;color:var(--text-3);letter-spacing:.5px;white-space:nowrap}
 .ww-wd.today{color:var(--red);font-weight:600}
-.ww-seg{width:24px;height:2.5px;background:var(--red);flex-shrink:0;margin-top:17px}
+.ww-seg{width:24px;height:2.5px;background:var(--red);opacity:.3;flex-shrink:0;margin-top:17px}
 .win-hint{font-size:12px;color:var(--text-3);margin-top:14px}
 .win-stats{margin-top:10px;font-size:13px;color:var(--text-2);line-height:1.6}
 /* v11.77 训练完成小结条（方案4·B）：环＝本周力量训练进度（目标 3 次），中心＝本周已练次数；字体沿用圆体栈 */
@@ -543,7 +541,10 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .wc-card{margin-top:10px;background:var(--soft);border-radius:var(--radius);padding:10px 12px}
 .wc-title{font-size:12px;color:var(--text-2);margin-bottom:4px}
 .wc-x{display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-top:3px}
-.rv-badge{font-size:10px;background:var(--red);color:#FFFDF9;border-radius:8px;padding:1px 7px;margin-left:6px;vertical-align:2px;font-weight:600}
+.rv-badge{font-size:10px;background:var(--red);color:#FFFDF9;border-radius:8px;padding:2px 8px;font-weight:600}
+/* v11.80 「待复习 N」不再挤在标题行（320 屏必被截断），改为独占一行置于描述下方 */
+.rv-row{margin-top:6px;display:flex;align-items:center;gap:8px}
+.rv-row .rv-hint{font-size:10px;color:var(--text-3)}
 .rv-prog{height:5px;background:var(--soft);border-radius:3px;margin:6px 0 10px;overflow:hidden}
 .rv-prog-fill{height:100%;background:var(--green);border-radius:3px;transition:width var(--transition)}
 
@@ -574,8 +575,31 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .ms-badge.lit .mb-d{color:var(--amber);font-weight:600}
 
 /* ==================== Responsive ==================== */
+/* v11.78 战绩页周链自适应：7 圆 + 6 连线在窄屏必须放得下（约束 7N + 6S ≤ 屏宽 − 56px，
+   56 = 卡片左右 padding 24×2 + 周链 padding 4×2）。旧版固定 36/24 需要 396px，
+   360 屏只剩 304px → 被 overflow:hidden 裁掉，用户实测「圆圈超出屏幕」。
+   圆径与连线宽的竖直中心对齐：margin-top =（圆径 − 2.5）/ 2 */
+@media(max-width:479px){
+  .ww-node{width:30px;height:30px;font-size:14px}
+  .ww-seg{width:18px;margin-top:13.75px}
+  .ww-wd{font-size:9.5px}
+}
+@media(max-width:400px){
+  .ww-node{width:27px;height:27px;font-size:12.5px}
+  .ww-seg{width:14px;margin-top:12.25px}
+  .ww-wd{font-size:9px}
+}
 @media(max-width:360px){
   .task-grid{grid-template-columns:1fr}
+  .ww-node{width:25px;height:25px;font-size:11.5px}
+  .ww-seg{width:12px;margin-top:11.25px}
+  .ww-wd{font-size:8.5px}
+  .foot-note{font-size:9.5px;letter-spacing:.2px}
+}
+@media(max-width:330px){
+  .ww-node{width:23px;height:23px;font-size:11px}
+  .ww-seg{width:10px;margin-top:10.25px}
+  .ww-wd{font-size:8px}
 }
 @media all and (display-mode:standalone){
   body{padding-top:env(safe-area-inset-top)}
@@ -4404,7 +4428,9 @@ function fitBarsHtml() {
   }
   var total = 0, max = 0, n = 0;
   arr.forEach(function(x) { total += x.m; if (x.m > max) max = x.m; if (x.m > 0) n++; });
-  if (max === 0) return '';
+  // v11.81 原为 max===0 直接 return ''（整张图消失）：无训练记录时看起来像「App 坏了」。
+  // 现改为始终渲染——空数据呈一条灰底基线（含跑步日跑鞋 / 周日白旗），与有数据时同一视觉语言。
+  var _fitNote = max > 0 ? ('👟 跑步日 · ⚑ 全休 · 单日最高 ' + max + ' 分钟') : '近 30 天暂无训练记录';
   var W = 640, H = 46, B = 4, gap = 3, bw = (W - gap * 29) / 30;
   var bars = '';
   arr.forEach(function(x, i) {
@@ -4424,7 +4450,7 @@ function fitBarsHtml() {
   });
   return '<div class="wc-card"><div class="wc-title">肌肉强度</div>' +
     '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" preserveAspectRatio="none" style="display:block;height:40px">' + bars + '</svg>' +
-    '<div class="wc-x"><span>' + arr[0].d.slice(5).replace('-', '/') + '</span><span>👟 跑步日 · ⚑ 全休 · 单日最高 ' + max + ' 分钟</span><span>' + arr[29].d.slice(5).replace('-', '/') + '</span></div></div>';
+    '<div class="wc-x"><span>' + arr[0].d.slice(5).replace('-', '/') + '</span><span>' + _fitNote + '</span><span>' + arr[29].d.slice(5).replace('-', '/') + '</span></div></div>';
 }
 
 // v11.62 知识解锁点阵（置于知识库成就卡内部）：近30天每日解锁 0~3 点，GitHub 贡献式
@@ -5063,13 +5089,11 @@ function showWinCelebration(taskName, stats, sum) {
       '<div class="ww-wd' + (wi === 0 ? ' today' : '') + '">' + (wi === 0 ? '今天' : wwd) + '</div></div>';
     if (wi < 0) week += '<div class="ww-seg"></div>';
   }
+  // v11.78：普通打卡（英语/日记/知识库）一律随机激励语；
+  // 原先周日会改显示「本周：训练 N 次…」周汇总，被用户否决（且周日零点全是 0，观感差）
   var _perfect = state.perfectDay === getTodayKey();
   var _title;
   if (_perfect) _title = PERFECT_SLOGANS[Math.floor(Math.random() * PERFECT_SLOGANS.length)];
-  else if (new Date().getDay() === 0) {
-    var _wk = weeklyStats();
-    _title = '本周：训练 ' + _wk.sess + ' 次 · 学词 ' + _wk.words + ' · 通透 ' + _wk.libCnt + ' 条';
-  }
   else _title = WIN_SLOGANS[Math.floor(Math.random() * WIN_SLOGANS.length)];
   var _emoji = _perfect ? '💯' : '🏆';
   var _ms = STREAK_MILESTONES.indexOf(hi.streak) !== -1;   // v11.23 里程碑徽章条
@@ -5170,7 +5194,7 @@ function focusBarHtml(completed, total) {
   if (currentTab !== 'home') return '';
   var next = null;
   var _td = todayDefs(); for (var i = 0; i < _td.length; i++) { if (!state.tasks[_td[i].id]) { next = _td[i]; break; } }
-  var html = '<div class="focus-bar">';
+  var html = '<div class="focus-bar' + (next ? '' : ' focus-done') + '">';
   if (!next) {
     html += '<span>🎉 今日 ' + completed + '/' + total + ' 全部完成</span><span class="fb-next" style="color:var(--text-3);font-weight:400">明天见</span>';
   } else {
@@ -7267,27 +7291,7 @@ function toggleStats() {
   renderAll();
 }
 
-// v11.68 今日达成结算卡：当天全部打满后出现一次（金色环 + 连续天数 / XP / 今日产出）
-function todayDoneHtml(completed, total) {
-  if (!total || completed < total) return '';
-  var hi = headerInsights();
-  var fit = state.fitStats || {}, eng = state.engStats || {}, lib = state.libStats || {}, today = getTodayKey();
-  var mins = 0;
-  ((fit.days && fit.days[today]) || []).forEach(function(id) { mins += (FIT_MINUTES[id] || 8); });
-  var words = ((eng.days && eng.days[today]) || []).indexOf('english_words') !== -1 ? 3 : 0;
-  var pts = ((lib.days && lib.days[today]) || []).length;
-  var bits = ['连续 ' + hi.streak + ' 天', '+' + hi.todayXp + ' XP'];
-  if (mins > 0) bits.push('训练 ' + mins + ' 分');
-  else if (words > 0) bits.push('学词 ' + words + ' 个');
-  else if (pts > 0) bits.push('知识 ' + pts + ' 条');
-  var circ = (2 * Math.PI * 15).toFixed(1);
-  return '<div class="done-card">' +
-    '<svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" style="flex:0 0 auto">' +
-    '<circle cx="20" cy="20" r="15" fill="none" stroke="var(--border-soft)" stroke-width="3.5"/>' +
-    '<circle cx="20" cy="20" r="15" fill="none" stroke="var(--amber)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="' + circ + '" stroke-dashoffset="0" transform="rotate(-90 20 20)"/></svg>' +
-    '<div><div class="dc-title">今日达成 · ' + completed + '/' + total + '</div>' +
-    '<div class="dc-sub">' + bits.join(' · ') + '</div></div></div>';
-}
+// v11.82 今日达成卡已移除：完成态由金边焦点条承接
 
 function renderAll() {
   var app = document.getElementById('app');
@@ -7341,7 +7345,7 @@ function renderAll() {
   // v11.23 晚间连胜预警条：20 点后且今日未全完成时显示（点 ✕ 当天不再打扰）
   html += nightWarnBar(completed, total);
   html += focusBarHtml(completed, total);
-  if (currentTab === 'home') html += todayDoneHtml(completed, total);   // v11.68 今日达成结算卡
+  // v11.82 今日达成卡移除：完成态由金边焦点条承接（避免与进度环/焦点条三重重复）
 
   if (currentTab === 'home' && _stOpen) {   // v11.68 历史回顾随统计区展开
     html += '<section class="section">';
@@ -7376,12 +7380,8 @@ function renderAll() {
   if (currentTab === 'home' || currentTab === 'fit') {
   // Module 2: Fitness
   html += '<section class="section">';
-  var _fitRest = fitRestInfo();
-  html += '<div class="sec-title"><span class="dot" style="background:var(--blue)"></span>五项健身专项训练<span class="sec-tag">' + (_fitRest ? '隔日训练' : '力量日 · 音乐引导') + '</span></div>';
+  html += '<div class="sec-title"><span class="dot" style="background:var(--blue)"></span>五项健身专项训练<span class="sec-tag">力量日 · 音乐引导</span></div>';
   html += renderFitAchievement();
-  if (_fitRest) {
-    html += '<div class="fit-rest-banner">' + (_fitRest.run ? '🏃' : '🌙') + ' ' + _fitRest.msg + '</div>';
-  }
   html += '<div class="fit-rail">';
   TASK_DEFS.filter(function(t){return t.module===2;}).forEach(function(t) {
     html += renderFitnessCard(t);
@@ -7412,17 +7412,17 @@ function renderAll() {
   var _bkNote = '', _bkWarn = '';
   if (state.lastBackup) {
     var _bkD = Math.floor((new Date(getTodayKey()) - new Date(state.lastBackup)) / 86400000);
-    _bkNote = ' · 上次备份 ' + (_bkD <= 0 ? '今天' : _bkD + ' 天前');
+    _bkNote = ' · 备份' + (_bkD <= 0 ? '今天' : _bkD + '天前');
     if (_bkD >= 7) _bkWarn = ' style="color:var(--red)"';
   }
   var _kb = storageKB();
-  var _kbWarn = _kb > 500 ? ' style="color:var(--red)"' : '';
-  html += '<span class="foot-note"' + _bkWarn + '>v11.77 · 数据仅存本地 · 不上传不联网 · 数据 ' + _kb + 'KB' + _bkNote + '</span>';
   if (_kb > 300) html += '<button class="reset-btn" onclick="storageTrim()">🧹 瘦身</button>';
   html += '<button class="reset-btn" onclick="backupExport()">⬇ 备份数据</button>';
   html += '<button class="reset-btn" onclick="backupImportClick()">⬆ 导入恢复</button>';
   html += '<button class="reset-btn" onclick="themeModeToggle()">🌗 主题：' + (themeModeNow()==='auto' ? '自动' : '手动') + '</button>';
   html += '</div>';
+  // v11.79 版本信息独立成行置于页脚最底部，一句单行，不再挤在左侧
+  html += '<div class="foot-note"' + _bkWarn + '>v11.82 · 数据仅存本地 · ' + _kb + 'KB' + _bkNote + '</div>';
   html += '</footer>';
   html += '<input type="file" id="backup-file" accept=".json,application/json" style="display:none" onchange="backupImport(this.files[0])">';
 
@@ -7452,8 +7452,11 @@ function renderTaskCard(t) {
   html += '<span class="st-icon">' + taskIcon(t) + '</span>';
   html += '<div class="st-info">';
   var _rvN = (state.engReview || []).filter(function(r) { return r.due <= daysSinceEpoch(); }).length;
-  html += '<div class="st-name">' + t.name + (_rvN > 0 && t.id === 'english_words' ? '<span class="rv-badge">待复习 ' + _rvN + '</span>' : '') + '</div>';
+  html += '<div class="st-name">' + t.name + '</div>';
   html += '<div class="st-desc">点卡片查看今日内容</div>';
+  if (_rvN > 0 && t.id === 'english_words') {
+    html += '<div class="rv-row"><span class="rv-badge">待复习 ' + _rvN + '</span><span class="rv-hint">点击进入复习</span></div>';
+  }
   html += '</div></div>';
   html += '<button class="pill-btn ' + (completed ? 'gray' : 'green') + '" onclick="event.stopPropagation();openEnglishDetail(\'' + engKey + '\')">开始</button>';
   html += '</div>';
@@ -8136,7 +8139,7 @@ function init() {
     }
   });
 
-  console.log('✅ 自律打卡APP v11.77 已启动');
+  console.log('✅ 自律打卡APP v11.82 已启动');
 }
 
 if (document.readyState === 'loading') {
