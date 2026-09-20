@@ -727,7 +727,7 @@ var TASK_DEFS = [
   { id:'english_sentence', name:'1个英语句子', module:1, icon:'✍️', desc:'每日固定必做' },
   { id:'fitness_quads', name:'股四头肌训练', module:2, icon:'🦵', desc:'语音引导 · 约12分钟' },
   { id:'fitness_glutes', name:'臀肌训练', module:2, icon:'🍑', desc:'音乐引导 · 约8分钟' },
-  { id:'fitness_chest', name:'胸肌上肢训练', module:2, icon:'💪', desc:'音乐引导 · 约8分钟' },
+  { id:'fitness_chest', name:'胸肌训练', module:2, icon:'💪', desc:'音乐引导 · 约8分钟' },
   { id:'fitness_cervical', name:'颈椎训练', module:2, icon:'🧘', desc:'音乐引导 · 约8分钟' },
   { id:'fitness_knees', name:'膝盖养护训练', module:2, icon:'🦴', desc:'音乐引导 · 约8分钟' },
   { id:'journal', name:'每日日记', module:3, icon:'📝', desc:'在MacBook完成日记后打卡' }
@@ -4465,7 +4465,8 @@ function libDotsHtml() {
   }
   var total = 0, active = 0;
   arr.forEach(function(x) { total += x.c; if (x.c > 0) active++; });
-  if (total === 0) return '';
+  // v11.83 原为 total===0 直接 return ''（零记录整块消失）：改为始终渲染，零数据=15% 透明度种子基线
+  var _dotsNote = total > 0 ? '满格 = 三类全解锁' : '近 30 天暂无解锁记录';
   var W = 640, H = 64, r = 4.5, gapx = (W - 10) / 29, gapy = 13;   // v11.67 H 46→64、height 40→56px：y 压缩比例≈0.87 不变，种子形状完全不变，只给顶部小苗留空间
   var dots = '';
   arr.forEach(function(x, i) {
@@ -4487,7 +4488,7 @@ function libDotsHtml() {
   });
   return '<div class="wc-card"><div class="wc-title">大脑进化</div>' +
     '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" preserveAspectRatio="none" style="display:block;height:56px">' + dots + '</svg>' +
-    '<div class="wc-x"><span>' + arr[0].d.slice(5).replace('-', '/') + '</span><span>满格 = 三类全解锁</span><span>' + arr[29].d.slice(5).replace('-', '/') + '</span></div></div>';
+    '<div class="wc-x"><span>' + arr[0].d.slice(5).replace('-', '/') + '</span><span>' + _dotsNote + '</span><span>' + arr[29].d.slice(5).replace('-', '/') + '</span></div></div>';
 }
 
 // v11.62 累计学词曲线（置于英语成就卡内部）：由 engStats.days 打卡记录推导（每完成一次生词任务 +3 词）
@@ -4512,19 +4513,20 @@ function wordsCurveHtml() {
     if (cum > max) max = cum;
     _d.setDate(_d.getDate() + 1);
   }
-  if (max < 3) return '';
+  // v11.83 原为 max<3 直接 return ''（零记录时整块图消失，华为上像「坏了」）：改为始终渲染，零数据=底部灰色平线
   var W = 640, H = 90, L = 8, R = 8, T = 16, B = 6;   // T=16 给 +3 标注留头部空间
+  var _mx = max > 0 ? max : 1;                        // 防除零：零数据时全部 v=0，按比例落到底部
   var line = '', area = '';
   pts.forEach(function(pt, i) {
     var x = L + (pts.length === 1 ? 0 : i * (W - L - R) / (pts.length - 1));
-    var y = T + (H - T - B) * (1 - pt.v / max);
+    var y = T + (H - T - B) * (1 - pt.v / _mx);
     line += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
     area += x.toFixed(1) + ',' + y.toFixed(1) + ' ';
   });
   area = L + ',' + (H - B) + ' ' + area + (W - R) + ',' + (H - B);
   var last = pts[pts.length - 1];
   var lx = W - R;
-  var ly = T + (H - T - B) * (1 - last.v / max);
+  var ly = T + (H - T - B) * (1 - last.v / _mx);
   // v11.66 亮点：每日增量圆圈+标注 · 里程碑环（每 +15 词）· 末点呼吸光晕 · 悬浮累计徽章
   var deco = '';
   var ms = {};   // 里程碑日索引
@@ -4536,7 +4538,7 @@ function wordsCurveHtml() {
   }
   pts.forEach(function(pt, i) {
     var x = L + (pts.length === 1 ? 0 : i * (W - L - R) / (pts.length - 1));
-    var y = T + (H - T - B) * (1 - pt.v / max);
+    var y = T + (H - T - B) * (1 - pt.v / _mx);
     if (pt.inc > 0) {
       // 打词日：圆圈（里程碑日升级为白底蓝环），上方标当日增量
       if (ms[i]) {
@@ -4561,8 +4563,9 @@ function wordsCurveHtml() {
     '<polygon points="' + area + '" fill="var(--blue)" opacity="0.08"/>' +
     '<path d="' + line + '" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
     deco + '</svg>' +
-    '<div class="wc-x"><span>' + pts[0].d.slice(5).replace('-', '/') + '</span><span>近 30 天 +' +
-    (last.v - pts[0].v) + ' 词</span><span>' + last.d.slice(5).replace('-', '/') + '</span></div></div>';
+    '<div class="wc-x"><span>' + pts[0].d.slice(5).replace('-', '/') + '</span><span>' +
+    (max > 0 ? ('近 30 天 +' + (last.v - pts[0].v) + ' 词') : '近 30 天暂无学词记录') + '</span><span>' +
+    last.d.slice(5).replace('-', '/') + '</span></div></div>';
 }
 
 
@@ -5726,7 +5729,7 @@ function renderGuidedPanel() {
 /* ==================== CHEST TABATA GUIDED TRAINING ==================== */
 var TABATA_TRAININGS = {
   fitness_chest: {
-    title: '胸肌上肢训练',
+    title: '胸肌训练',
     actions: ['哑铃卧推', '哑铃夹胸', '哑铃窄推', '俯卧撑']
   },
   fitness_glutes: {
@@ -7422,7 +7425,7 @@ function renderAll() {
   html += '<button class="reset-btn" onclick="themeModeToggle()">🌗 主题：' + (themeModeNow()==='auto' ? '自动' : '手动') + '</button>';
   html += '</div>';
   // v11.79 版本信息独立成行置于页脚最底部，一句单行，不再挤在左侧
-  html += '<div class="foot-note"' + _bkWarn + '>v11.82 · 数据仅存本地 · ' + _kb + 'KB' + _bkNote + '</div>';
+  html += '<div class="foot-note"' + _bkWarn + '>v11.83 · 数据仅存本地 · ' + _kb + 'KB' + _bkNote + '</div>';
   html += '</footer>';
   html += '<input type="file" id="backup-file" accept=".json,application/json" style="display:none" onchange="backupImport(this.files[0])">';
 
@@ -7476,7 +7479,8 @@ function renderFitnessCard(t) {
   html += '<div class="f-dur">⏱ ' + t.desc + '</div>';
   html += '<div class="f-controls">';
   if (restDay && !completed) {
-    html += '<button class="pill-btn gray" style="width:100%" disabled>⏸ 休息日休训</button>';
+    // v11.83 ⏸ emoji 在华为 emoji 字体下是蓝色圆角块，改用内联 SVG 两根竖条（currentColor 继承按钮白字）
+    html += '<button class="pill-btn gray" style="width:100%" disabled><svg viewBox="0 0 12 12" width="11" height="11" style="vertical-align:-1px;margin-right:4px" fill="currentColor"><rect x="2" y="1.5" width="2.6" height="9" rx="1.1"/><rect x="7.4" y="1.5" width="2.6" height="9" rx="1.1"/></svg>休息日休训</button>';
   } else {
     html += '<button class="pill-btn ' + (completed ? 'gray' : 'blue') + '" style="width:100%" onclick="startGuidedTraining(\'' + t.id + '\')">' + (completed ? '✓ 训练完成' : '▶ 开始训练') + '</button>';
   }
@@ -8139,7 +8143,7 @@ function init() {
     }
   });
 
-  console.log('✅ 自律打卡APP v11.82 已启动');
+  console.log('✅ 自律打卡APP v11.83 已启动');
 }
 
 if (document.readyState === 'loading') {
